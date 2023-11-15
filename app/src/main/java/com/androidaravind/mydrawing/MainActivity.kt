@@ -3,19 +3,34 @@ package com.androidaravind.mydrawing
 import android.app.Dialog
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.view.get
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private var drawingView: DrawingView? = null
-    private var ivBrushSizeSelector: ImageView? = null
+    private var ivBrushSizeSelector: ImageButton? = null
+    private var ivBrushColorSelector: ImageButton? = null
     private var brushDialog: Dialog? = null
+    private var mLinearLayoutColorPicker: LinearLayout? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         drawingView = findViewById(R.id.dvMainLayout)
         ivBrushSizeSelector = findViewById(R.id.ivBrushSizeSelector)
+        mLinearLayoutColorPicker = findViewById(R.id.ll_color_picker)
+        ivBrushColorSelector = mLinearLayoutColorPicker!![0] as ImageButton
+        ivBrushColorSelector!!.setImageDrawable(
+            ContextCompat.getDrawable(
+                this,
+                R.drawable.pallet_pressed
+            )
+        )
+
         ivBrushSizeSelector?.setOnClickListener(this)
         brushDialog = Dialog(this)
 
